@@ -24,7 +24,7 @@ const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, fieldUpdat
       case InputFieldType.Checkbox: 
         return <input id={fieldKey} type="checkbox" checked={fieldChecked} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.checked)}/>;
       case InputFieldType.Calendar: 
-        return <input id={fieldKey} type="calendar" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)}/>;
+        return <input id={fieldKey} type="date" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)}/>;
     }
   }
   

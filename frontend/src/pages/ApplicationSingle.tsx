@@ -115,8 +115,38 @@ const ApplicationList = ({ isNew }: Props) => {
           <div className="right flex column gap-1">
             <Card>STATUS</Card>
 
-            <Card>LOCATION</Card>
-            <Card>DATE</Card>
+            <Card>
+              <Input
+                title="Location"
+                fieldKey="location"
+                fieldType={InputFieldType.Text}
+                fieldValue={application.location}
+                fieldUpdateHandler={fieldUpdateHandler}
+              />
+              <Input
+                title="Remote"
+                fieldKey="isRemote"
+                fieldType={InputFieldType.Checkbox}
+                fieldChecked={application.isRemote}
+                fieldUpdateHandler={fieldUpdateHandler}
+              />
+              </Card>
+            <Card>
+              <Input
+                title="Date Applied"
+                fieldKey="dateApplied"
+                fieldType={InputFieldType.Calendar}
+                fieldValue={application.dateApplied}
+                fieldUpdateHandler={fieldUpdateHandler}
+              />
+              <Input
+                title="Date Updated"
+                fieldKey="dateUpdated"
+                fieldType={InputFieldType.Calendar}
+                fieldValue={application.dateUpdated}
+                fieldUpdateHandler={fieldUpdateHandler}
+              />
+            </Card>
           </div>
         </section>
       </section>

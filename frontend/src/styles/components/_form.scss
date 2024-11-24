@@ -3,9 +3,84 @@
   flex-direction: column;
   width: 100%;
   box-sizing: border-box;
+}
 
-  input, textarea {
-    width: 100%;
-    box-sizing: border-box;
+
+input, textarea {
+  width: 100%;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  accent-color: var(--color-primary-dark);
+}
+
+textarea {
+  resize: vertical;
+  font-size: 0.9rem;
+}
+
+input:not([type='checkbox']), textarea {
+  // border: 1px solid var(--color-tertiary-light);
+  border: none;
+  border-bottom: 1px solid var(--color-border);
+  padding: 0.25rem 0.5rem;
+  outline:none;
+  margin: 0.25rem 0;
+  transition: 0.15s ease border-color;
+
+  &:active, &:focus {
+    border-color: var(--color-primary-medium);
   }
+}
+input[type=checkbox] {
+  width:  1.5rem;
+  height: 1.5rem;
+}
+
+/**************************
+        Buttons
+**************************/
+
+.btn {
+  font-family: "Poppins", sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  // margin: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  background-color: var(--color-text-body);
+  color: var(--color-btn-primary-text);
+  
+  border-radius: var(--border-radius-button);
+  border: none;
+
+
+  &.primary {
+      color: var(--color-btn-primary-text);
+      background-color: var(--color-btn-primary-background);
+  
+      &:hover {
+          background-color: var(--color-btn-primary-bg-hover);
+      }
+  }
+
+  
+
+  &.secondary {
+      background-color: transparent;
+      color: var(--color-btn-outline);
+      border: 2px solid var(--color-btn-outline);
+  
+      &:hover {
+          background-color: var(--color-btn-outline);
+          color: var(--color-bg-secondary);
+      }
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
 }

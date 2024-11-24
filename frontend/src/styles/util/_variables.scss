@@ -24,6 +24,8 @@ $green-300: #78DAB0;
 $yellow-700: #F19253;
 $yellow-300: #FFE0A8;
 
+$blue-300: #A6C6F3;
+
 $light-400: #C2CADC;
 $light-200: #F5F8FF;
 $light-100: #FFFFFF;
@@ -36,12 +38,15 @@ $light-100: #FFFFFF;
     --color-bg-primary: #{$light-200};
     --color-bg-secondary: #{$light-100};
 
+    --color-border: #{$light-400};
 
     --color-primary-dark: #{$green-700};
     --color-primary-medium: #{$green-500};
 
     --color-secondary-dark: #{$yellow-700};
     --color-secondary-light: #{$yellow-300};
+
+    --color-tertiary-light: #{$blue-300};
 
     --color-text-title: #{$dark-500};
     --color-text-subtitle: #{$green-700};

@@ -1,0 +1,58 @@
+
+/**************************
+        Border Radius
+**************************/
+
+$border-radius-button: 8px;
+$border-radius-card: 16px;
+$border-radius-tag: 4px;
+
+
+
+
+/**************************
+        Colors
+**************************/
+
+$dark-500: #141416;
+$dark-300: #2E2E2E;
+
+$green-700: #1D8560;
+$green-500: #49B989;
+$green-300: #78DAB0;
+
+$yellow-700: #F19253;
+$yellow-300: #FFE0A8;
+
+$light-400: #C2CADC;
+$light-200: #F5F8FF;
+$light-100: #FFFFFF;
+
+
+:root {
+    --border-radius-button: #{$border-radius-button};
+    --border-radius-card: #{$border-radius-card};
+
+    --color-bg-primary: #{$light-200};
+    --color-bg-secondary: #{$light-100};
+
+
+    --color-primary-dark: #{$green-700};
+    --color-primary-medium: #{$green-500};
+
+    --color-secondary-dark: #{$yellow-700};
+    --color-secondary-light: #{$yellow-300};
+
+    --color-text-title: #{$dark-500};
+    --color-text-subtitle: #{$green-700};
+    --color-text-body: #{$dark-300};
+    --color-text-link: #{$yellow-700};
+
+    --color-btn-primary-background: #{$green-500};
+    --color-btn-primary-bg-hover: #{$green-300};
+    --color-btn-primary-text: #{$light-100};
+    --color-btn-outline: #{$yellow-700};
+}
+
+
+

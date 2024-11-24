@@ -1,0 +1,133 @@
+/**************************
+        General
+**************************/
+
+html, body {
+  margin:0;
+  padding:0;
+
+  font-family: "Poppins", sans-serif;
+  font-optical-sizing: auto;
+
+  
+}
+
+html {
+  overflow-x: hidden;
+}
+body, 
+#main {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-body);
+}
+
+#main {
+  overflow: hidden;
+}
+
+
+.container {
+  max-width:1200px;
+  margin:0 auto;
+  padding:0 2rem;
+
+}
+.section {
+  padding:1rem;
+  z-index: 5;
+  position: relative;
+}
+
+
+
+/**************************
+        Typography
+**************************/
+
+
+h1, h2, h3, h4, h5, h6 {
+  color: var(--color-text-title);
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  letter-spacing: 0.5px;
+  font-weight: 500;
+
+  &.large {
+    font-size: 3.815rem;
+  }
+}
+
+h1 {font-size: 2.441rem;}
+h2 {font-size: 1.953rem;}
+h3 {font-size: 1.563rem;}
+h4 {
+  font-size: 1.25rem; 
+  text-transform: uppercase;
+  color: var(--color-text-subtitle);
+}
+
+
+p {
+  color: var(--color-text-body);
+  line-height: 1.5;
+}
+
+.uppercase {
+  text-transform: uppercase;
+}
+
+.center {
+  text-align: center;
+}
+
+a, a:visited {
+  color: var(--color-text-link);
+}
+
+
+
+/**************************
+        Buttons
+**************************/
+
+.btn {
+  font-family: "Poppins", sans-serif;
+  padding: 0.5rem 1.5rem;
+  border-radius: 6px;
+  text-decoration: none;
+  margin: 1rem;
+  transition: background-color 0.2s ease, color 0.2s ease;
+  background-color: var(--color-text-body);
+  color: var(--color-btn-primary-text);
+  font-weight: 600;
+  border-radius: var(--border-radius-button);
+  border: none;
+
+
+  &.primary {
+      color: var(--color-btn-primary-text);
+      background-color: var(--color-btn-primary-background);
+  
+      &:hover {
+          background-color: var(--color-btn-primary-bg-hover);
+      }
+  }
+
+  
+
+  &.secondary {
+      background-color: transparent;
+      color: var(--color-btn-outline);
+      border: 2px solid var(--color-btn-outline);
+  
+      &:hover {
+          background-color: var(--color-btn-outline);
+          color: var(--color-bg-secondary);
+      }
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+  }
+
+}

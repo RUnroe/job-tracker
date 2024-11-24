@@ -8,8 +8,15 @@ const ApplicationList = () => {
     <main id="applicationList">
       <header>
         <h1>Application</h1>
+        {id}
         <div className="actions">
-          <button>
+          <button className="btn">
+            Save
+          </button>
+          <button className="btn primary">
+            Save
+          </button>
+          <button className="btn secondary">
             Save
           </button>
         </div>

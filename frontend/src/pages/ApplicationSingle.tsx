@@ -4,6 +4,7 @@ import Input from "../components/Input";
 import { InputFieldType } from "../types/InputFieldType";
 import { ApplicationStatus } from "../types/ApplicationStatus";
 import { useState } from "react";
+import Tag from "../components/Tag";
 
 interface Props {
   isNew?: boolean;
@@ -12,6 +13,7 @@ interface Props {
 const ApplicationList = ({ isNew }: Props) => {
   const { id } = useParams();
 
+  const [openTechnologyPopup, setOpenTechnologyPopup] = useState(false);
   const [application, setApplication] = useState({
     ID: "",
     company: "",
@@ -21,12 +23,14 @@ const ApplicationList = ({ isNew }: Props) => {
     status: ApplicationStatus.Applied,
     salary: "",
     listingLink: "",
-    technology: [],
+    technologies: ["React"],
     companyInfo: "",
     roleInfo: "",
     dateApplied: "",
     dateUpdated: "",
   });
+
+
 
   const fieldUpdateHandler = (
     fieldKey: string,
@@ -37,6 +41,13 @@ const ApplicationList = ({ isNew }: Props) => {
       [fieldKey]: newValue,
     }));
   };
+
+
+  const removeTag = (tagToRemove: string) => {
+    let newApplication = structuredClone(application);
+    newApplication.technologies = newApplication.technologies.filter(tech => tech !== tagToRemove);
+    setApplication(newApplication);
+  }
 
   const saveApplication = () => {};
 
@@ -92,7 +103,24 @@ const ApplicationList = ({ isNew }: Props) => {
               />
             </Card>
 
-            <Card>TECHNOLOGY</Card>
+            <Card>
+              <label className="sub-title">Technology</label>
+              <div className="tag-list">
+                {application.technologies?.map(tech => (
+                  <Tag 
+                    tagKey={tech}
+                    label={tech} 
+                    handleRemove={() => removeTag(tech)}
+                  />
+                ))}
+                <Tag 
+                    tagKey={"add"}
+                    label={"Add"} 
+                    isNew
+                    handleOpenAddPopup={() => setOpenTechnologyPopup(true)}
+                  />
+              </div>
+            </Card>
 
             <Card className="col-2">
               <Input
@@ -113,7 +141,35 @@ const ApplicationList = ({ isNew }: Props) => {
           </div>
 
           <div className="right flex column gap-1">
-            <Card>STATUS</Card>
+            <Card>
+              <label className="sub-title">Status</label>
+              <div className="button-group">
+                <button 
+                  className={`btn ${application.status === ApplicationStatus.Applied ? "selected" : ""}`}
+                  onClick={() => fieldUpdateHandler("status", ApplicationStatus.Applied)}
+                >
+                  Applied
+                </button>
+                <button 
+                  className={`btn ${application.status === ApplicationStatus.Interview ? "selected" : ""}`}
+                  onClick={() => fieldUpdateHandler("status", ApplicationStatus.Interview)}
+                >
+                  Interview
+                </button>
+                <button 
+                  className={`btn ${application.status === ApplicationStatus.Offer ? "selected" : ""}`}
+                  onClick={() => fieldUpdateHandler("status", ApplicationStatus.Offer)}
+                >
+                  Offer
+                </button>
+                <button 
+                  className={`btn ${application.status === ApplicationStatus.Rejected ? "selected" : ""}`}
+                  onClick={() => fieldUpdateHandler("status", ApplicationStatus.Rejected)}
+                >
+                  Rejected
+                </button>
+              </div>
+            </Card>
 
             <Card>
               <Input
@@ -145,6 +201,7 @@ const ApplicationList = ({ isNew }: Props) => {
                 fieldType={InputFieldType.Calendar}
                 fieldValue={application.dateUpdated}
                 fieldUpdateHandler={fieldUpdateHandler}
+                disabled
               />
             </Card>
           </div>

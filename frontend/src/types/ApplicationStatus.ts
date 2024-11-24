@@ -1,6 +1,6 @@
 export enum ApplicationStatus {
-  Applied,
-  Interview,
-  Offer,
-  Rejected,
+  Applied = "Applied",
+  Interview = "Interview",
+  Offer = "Offer",
+  Rejected = "Rejected",
 }

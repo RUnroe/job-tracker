@@ -26,6 +26,8 @@ $yellow-300: #FFE0A8;
 
 $blue-300: #A6C6F3;
 
+$red-700: #cf2c2c;
+
 $light-400: #C2CADC;
 $light-200: #F5F8FF;
 $light-100: #FFFFFF;
@@ -34,6 +36,7 @@ $light-100: #FFFFFF;
 :root {
     --border-radius-button: #{$border-radius-button};
     --border-radius-card: #{$border-radius-card};
+    --border-radius-tag: #{$border-radius-tag};
 
     --color-bg-primary: #{$light-200};
     --color-bg-secondary: #{$light-100};
@@ -47,6 +50,8 @@ $light-100: #FFFFFF;
     --color-secondary-light: #{$yellow-300};
 
     --color-tertiary-light: #{$blue-300};
+
+    --color-danger : #{$red-700};
 
     --color-text-title: #{$dark-500};
     --color-text-subtitle: #{$green-700};

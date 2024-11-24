@@ -93,7 +93,57 @@ a, a:visited {
 
 
 
+/**************************
+        Tag
+**************************/
+.tag-list {
+  display: flex;
+  gap: 1rem
+  
+}
 
+
+.tag {
+  color: var(--color-text-body);
+  background-color: var(--color-secondary-light);
+  padding: 0.25rem 0.5rem;
+  border: 2px dashed transparent;
+  border-radius: var(--border-radius-tag); 
+
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: fit-content;
+
+  transition: background-color 0.2s ease, color 0.2s ease;
+
+  &.new {
+    color: var(--color-primary-medium);
+    border-color: var(--color-primary-medium);
+    cursor: pointer;
+    background-color: transparent;
+    
+    &:hover {
+      background-color: var(--color-btn-primary-bg-hover);
+      color: var(--color-btn-primary-text);
+    }
+  }
+
+  button {
+    background-color: transparent;
+    border:none;
+    font-size: 1.1rem;
+    cursor: pointer;
+    color: var(--color-text-body);
+
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: var(--color-danger);
+    }
+
+  }
+}
 
 
 
@@ -115,11 +165,7 @@ a, a:visited {
   }
 }
 
-.col-2 {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-}
+
 
 
 .card {
@@ -128,7 +174,15 @@ a, a:visited {
   padding: 0.75rem 1.25rem;
   width: 100%;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
 
+.col-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.5rem;
 }
 
 .flex {

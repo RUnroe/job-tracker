@@ -57,7 +57,7 @@ input[type=checkbox] {
   border: none;
 
 
-  &.primary {
+  &.primary, &.selected {
       color: var(--color-btn-primary-text);
       background-color: var(--color-btn-primary-background);
   
@@ -83,4 +83,26 @@ input[type=checkbox] {
     cursor: pointer;
   }
 
+}
+
+
+.button-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+
+  .btn{
+    border: 2px solid transparent;
+    
+    &:not(.selected) {
+      background-color: transparent;
+      color: var(--color-tertiary-light);
+      border: 2px solid var(--color-tertiary-light);
+  
+      &:hover {
+        background-color: var(--color-tertiary-light);
+        color: var(--color-bg-secondary);
+    }
+    }
+  }
 }

@@ -6,25 +6,26 @@ interface Props {
   fieldKey: string,
   fieldValue?: string | number,
   fieldChecked?: boolean,
+  disabled?: boolean,
   fieldUpdateHandler?: (fieldKey: string, newValue: string | number | boolean) => void,
 }
 
-const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, fieldUpdateHandler}: Props) => {
+const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, disabled = false, fieldUpdateHandler}: Props) => {
   
   const generateInputField = () => {
     switch(fieldType) {
       case InputFieldType.PlainText: 
         return fieldValue;
       case InputFieldType.Text: 
-        return <input id={fieldKey} type="text" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)}/>;
+        return <input id={fieldKey} type="text" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)} disabled={disabled}/>;
       case InputFieldType.Number: 
-        return <input id={fieldKey} type="number" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)}/>;
+        return <input id={fieldKey} type="number" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)} disabled={disabled}/>;
       case InputFieldType.TextArea: 
-        return <textarea id={fieldKey} value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)}/>;
+        return <textarea id={fieldKey} value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)} disabled={disabled}/>;
       case InputFieldType.Checkbox: 
-        return <input id={fieldKey} type="checkbox" checked={fieldChecked} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.checked)}/>;
+        return <input id={fieldKey} type="checkbox" checked={fieldChecked} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.checked)} disabled={disabled}/>;
       case InputFieldType.Calendar: 
-        return <input id={fieldKey} type="date" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)}/>;
+        return <input id={fieldKey} type="date" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)} disabled={disabled}/>;
     }
   }
   

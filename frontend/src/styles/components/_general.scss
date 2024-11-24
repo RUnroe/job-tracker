@@ -130,18 +130,26 @@ a, a:visited {
   }
 
   button {
-    background-color: transparent;
-    border:none;
     font-size: 1.1rem;
+  }
+}
+
+
+.technology-item-list {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+
+  .technology-item {
+    border: 1px solid var(--color-border);
+    border-radius: var(--border-radius-tag);
+    padding: 0.5rem;
+    width: 100%;
     cursor: pointer;
-    color: var(--color-text-body);
 
-    transition: color 0.2s ease;
-
-    &:hover {
-      color: var(--color-danger);
+    &.selected {
+      border-color: var(--color-primary-medium);
     }
-
   }
 }
 

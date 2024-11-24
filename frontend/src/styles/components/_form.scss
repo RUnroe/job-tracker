@@ -85,6 +85,21 @@ input[type=checkbox] {
 
 }
 
+button.close {
+  background-color: transparent;
+  border:none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  color: var(--color-text-body);
+
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: var(--color-danger);
+  }
+
+}
+
 
 .button-group {
   display: flex;
@@ -93,7 +108,7 @@ input[type=checkbox] {
 
   .btn{
     border: 2px solid transparent;
-    
+
     &:not(.selected) {
       background-color: transparent;
       color: var(--color-tertiary-light);

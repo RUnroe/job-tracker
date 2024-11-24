@@ -17,7 +17,7 @@ const Tag = ({tagKey, label, isNew, handleRemove, handleOpenAddPopup}: Props) =>
     :
     <div className={`tag`}>
       {label}
-      <button onClick={handleRemove} key={tagKey}>
+      <button onClick={handleRemove} key={tagKey} className="close">
         ×
       </button>
     </div>

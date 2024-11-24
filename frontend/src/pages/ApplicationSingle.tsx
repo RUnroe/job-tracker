@@ -5,6 +5,7 @@ import { InputFieldType } from "../types/InputFieldType";
 import { ApplicationStatus } from "../types/ApplicationStatus";
 import { useState } from "react";
 import Tag from "../components/Tag";
+import TechnologyModal from "../components/TechnologyModal";
 
 interface Props {
   isNew?: boolean;
@@ -30,6 +31,8 @@ const ApplicationList = ({ isNew }: Props) => {
     dateUpdated: "",
   });
 
+  const allTechnologies = ["React"];
+
 
 
   const fieldUpdateHandler = (
@@ -46,6 +49,14 @@ const ApplicationList = ({ isNew }: Props) => {
   const removeTag = (tagToRemove: string) => {
     let newApplication = structuredClone(application);
     newApplication.technologies = newApplication.technologies.filter(tech => tech !== tagToRemove);
+    setApplication(newApplication);
+  }
+
+
+  const addTags = (tagsToAdd: string[]) => {
+    let newApplication = structuredClone(application);
+    //Filter out duplicates
+    newApplication.technologies = Array.from(new Set([...newApplication.technologies, ...tagsToAdd]));
     setApplication(newApplication);
   }
 
@@ -106,14 +117,16 @@ const ApplicationList = ({ isNew }: Props) => {
             <Card>
               <label className="sub-title">Technology</label>
               <div className="tag-list">
-                {application.technologies?.map(tech => (
+                {application.technologies?.sort()?.map(tech => (
                   <Tag 
+                    key={tech}
                     tagKey={tech}
                     label={tech} 
                     handleRemove={() => removeTag(tech)}
                   />
                 ))}
                 <Tag 
+                    key={"addtech"}
                     tagKey={"add"}
                     label={"Add"} 
                     isNew
@@ -207,6 +220,14 @@ const ApplicationList = ({ isNew }: Props) => {
           </div>
         </section>
       </section>
+      {openTechnologyPopup && 
+        <TechnologyModal
+          open={openTechnologyPopup}
+          allTechnologies={allTechnologies}
+          handleAddTechnology={addTags}
+          handleClose={() => setOpenTechnologyPopup(false)}
+        />
+      }
     </main>
   );
 };

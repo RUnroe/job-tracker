@@ -1,0 +1,11 @@
+.input-group {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  box-sizing: border-box;
+
+  input, textarea {
+    width: 100%;
+    box-sizing: border-box;
+  }
+}

@@ -13,6 +13,7 @@ function App() {
       <Route path="/" element={<ApplicationList />} />
       <Route path="application">
         <Route index path="list" element={<ApplicationList />} />
+        <Route path="new" element={<ApplicationSingle isNew/>} />
         <Route path=":id" element={<ApplicationSingle />} />
       </Route>
     </Routes>

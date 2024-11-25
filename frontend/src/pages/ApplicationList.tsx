@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import Card from "../components/Card";
 import { useEffect, useState } from "react";
-import { ApplicationStatus } from "../types/ApplicationStatus";
 import { InputFieldType } from "../types/InputFieldType";
 import Input from "../components/Input";
 import Skeleton from "react-loading-skeleton";

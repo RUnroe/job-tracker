@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require('cors');
 require('dotenv').config();
 
+
 const clerk = require('@clerk/express');
 const routes = require("./routes/routes");
 
@@ -12,7 +13,14 @@ app.use(cors());
 
 app.use(clerk.clerkMiddleware());
 
+
+
+
+
+
 routes.configure(app);
+
+
 
 
 

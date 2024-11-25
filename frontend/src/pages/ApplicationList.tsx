@@ -7,6 +7,7 @@ import Input from "../components/Input";
 import Skeleton from "react-loading-skeleton";
 import ApplicationListTable from "../components/ApplicationListTable";
 import Application from "../types/Application";
+import StatusFilters from "../components/StatusFilters";
 
 
 const ApplicationList = () => {
@@ -27,7 +28,7 @@ const ApplicationList = () => {
 
 
 
-  const handleClickSelectedStatus = (clickedStatus: ApplicationStatus) => {
+  const handleClickSelectedStatus = (clickedStatus: string) => {
     //If the selected filter is clicked again, deselect the filter
     if(selectedStatusFilter === clickedStatus) {
       setSelectedStatusFilter(null);
@@ -56,7 +57,11 @@ const ApplicationList = () => {
           <div className="left flex column gap-1">
             <Card>
               <label className="sub-title">Applications</label>
-              {/* {TODO: Add filtering bois} */}
+              <StatusFilters
+                selectedStatus={selectedStatusFilter || ""}
+                handleSelectStatus={handleClickSelectedStatus}
+                countsByStatus={{Applied: 90, Interview: 2, Offer: 0, Rejected: 12}}
+              />
               <ApplicationListTable applicationsList={applicationsList || []} />
             </Card>
           </div>

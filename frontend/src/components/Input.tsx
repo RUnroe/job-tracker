@@ -15,7 +15,7 @@ const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, disabled =
   const generateInputField = () => {
     switch(fieldType) {
       case InputFieldType.PlainText: 
-        return fieldValue;
+        return <p>{fieldValue}</p>;
       case InputFieldType.Text: 
         return <input id={fieldKey} type="text" value={fieldValue} onChange={(event) => fieldUpdateHandler && fieldUpdateHandler(fieldKey, event.target.value)} disabled={disabled}/>;
       case InputFieldType.Number: 

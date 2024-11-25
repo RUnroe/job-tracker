@@ -121,3 +121,20 @@ button.close {
     }
   }
 }
+
+
+/**************************
+        Table
+**************************/
+
+.MuiPaper-root {
+  --Paper-shadow: none !important;
+}
+
+.table-statistics {
+  .input-group {
+    p {
+      font-size: 1.4rem;
+    }
+  }
+}

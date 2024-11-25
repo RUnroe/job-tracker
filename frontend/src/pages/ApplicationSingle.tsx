@@ -6,6 +6,7 @@ import { ApplicationStatus } from "../types/ApplicationStatus";
 import { useEffect, useState } from "react";
 import Tag from "../components/Tag";
 import TechnologyModal from "../components/TechnologyModal";
+import Application from "../types/Application";
 
 interface Props {
   isNew?: boolean;
@@ -15,8 +16,7 @@ const ApplicationList = ({ isNew }: Props) => {
   const { id } = useParams();
 
   const [openTechnologyPopup, setOpenTechnologyPopup] = useState(false);
-  const [application, setApplication] = useState({
-    ID: "",
+  const [application, setApplication] = useState<Application>({
     company: "",
     position: "",
     location: "",

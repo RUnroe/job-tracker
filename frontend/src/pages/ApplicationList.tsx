@@ -5,20 +5,24 @@ import { ApplicationStatus } from "../types/ApplicationStatus";
 import { InputFieldType } from "../types/InputFieldType";
 import Input from "../components/Input";
 import Skeleton from "react-loading-skeleton";
+import ApplicationListTable from "../components/ApplicationListTable";
+import Application from "../types/Application";
 
 
 const ApplicationList = () => {
 
   const [selectedStatusFilter, setSelectedStatusFilter] = useState<string | null>();
 
-  const [applicationsList, setApplicationsList] = useState();
+  const [applicationsList, setApplicationsList] = useState<Application[]>();
   const [tableStatistics, setTableStatistics] = useState<any>();
 
   //Fetch list and statistics
   useEffect(() => {
     //TODO: fetch list of applications
+    setApplicationsList([]);
     
     //TODO: fetch statistics list
+    setTableStatistics({totalApplications: 100, currentMonth: 59, lastMonth: 22});
   }, []);
 
 
@@ -52,15 +56,16 @@ const ApplicationList = () => {
           <div className="left flex column gap-1">
             <Card>
               <label className="sub-title">Applications</label>
-
+              {/* {TODO: Add filtering bois} */}
+              <ApplicationListTable applicationsList={applicationsList || []} />
             </Card>
           </div>
           <div className="right flex column gap-1">
-            <Card>
+            <Card className="table-statistics">
               {tableStatistics ? 
-                <div>
+                <>
                   <Input
-                    title="Total"
+                    title="Total Applications"
                     fieldKey="totalApplications"
                     fieldType={InputFieldType.PlainText}
                     fieldValue={tableStatistics?.totalApplications}
@@ -77,7 +82,7 @@ const ApplicationList = () => {
                     fieldType={InputFieldType.PlainText}
                     fieldValue={tableStatistics?.lastMonth}
                   />
-                </div>
+                </>
                 :
                 <Skeleton count={3} className="input-group"/> 
               }

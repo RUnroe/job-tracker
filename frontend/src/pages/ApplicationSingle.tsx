@@ -3,7 +3,7 @@ import Card from "../components/Card";
 import Input from "../components/Input";
 import { InputFieldType } from "../types/InputFieldType";
 import { ApplicationStatus } from "../types/ApplicationStatus";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Tag from "../components/Tag";
 import TechnologyModal from "../components/TechnologyModal";
 
@@ -32,6 +32,14 @@ const ApplicationList = ({ isNew }: Props) => {
   });
 
   const allTechnologies = ["React"];
+
+  //Fetch data by id if viewing an existing application
+  useEffect(() => {
+    if(!isNew) {
+      //TODO: fetch application by id
+      console.log(id);
+    }
+  }, []);
 
 
 
@@ -63,9 +71,9 @@ const ApplicationList = ({ isNew }: Props) => {
   const saveApplication = () => {};
 
   return (
-    <main id="applicationList">
+    <main id="applicationSingle">
       <header className="section">
-        <section className="container flex space-between">
+        <section className="container flex space-between gap-1">
           <h1>{isNew && "New "}Application</h1>
           <div className="actions flex gap-1">
             <Link className="btn secondary" to={"/application/list"}>

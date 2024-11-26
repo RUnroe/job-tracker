@@ -42,7 +42,7 @@ const ApplicationList = ({ isNew }: Props) => {
   //Fetch data by id if viewing an existing application
   useEffect(() => {
     if(!isNew && id) {
-      //TODO: fetch application by id
+      //Fetch application by id
       getApplicationById(id)
       .then(response => response.json())
       .then(app => 

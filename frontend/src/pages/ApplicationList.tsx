@@ -9,6 +9,7 @@ import Application from "../types/Application";
 import StatusFilters from "../components/StatusFilters";
 import { SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 import getAllApplications from "../webservice/getAllApplications";
+import getApplicationStatistics from "../webservice/getApplicationStatistics";
 
 
 const ApplicationList = () => {
@@ -25,10 +26,13 @@ const ApplicationList = () => {
     //Fetch list of applications
     getAllApplications().then(response => response.json()).then(apps => {
       setApplicationsList(apps);
+      console.log(apps)
     });
     
-    //TODO: fetch statistics list
-    setTableStatistics({totalApplications: 100, currentMonth: 59, lastMonth: 22});
+    //Fetch statistics list
+    getApplicationStatistics().then(response => response.json()).then(stats => {
+      setTableStatistics(stats);
+    });
   }, []);
 
 

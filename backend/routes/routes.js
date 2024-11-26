@@ -20,19 +20,7 @@ const configure = (app) => {
     }
   });
 
-  app.get('/application/:id', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
-    const { userId } = req.auth;
-    const user = await clerk.clerkClient.users.getUser(userId);
-    if(user) {
-      const application = await applicationService.getApplicationById(req.params.id, userId);
-      if(application) {
-        return res.json(application);
-      }
-      else {
-        res.status(500).send();
-      }
-    }
-  });
+ 
 
   app.post('/application/new', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
     const { userId } = req.auth;
@@ -65,18 +53,7 @@ const configure = (app) => {
     }
   });
 
-  // app.get('/options/technology', clerk.requireAuth({ signInUrl }), async (req, res) => {
-  //   const { userId } = req.auth;
-  //   const user = await clerk.clerkClient.users.getUser(userId);
-    
-  //   if(user) {
-  //    let technologies = await applicationService.getAllTechnologies();
-      // if(technologies) {
-      //   return res.json(technologies);
-      // }
-  //   }
-  //   res.status(500).send();
-  // });
+  
 
   app.get('/options/technology', async (req, res) => {
     
@@ -91,10 +68,50 @@ const configure = (app) => {
   });
 
   app.get('/application/statistics', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
-    //TODO
+
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
-    return res.json({ user });
+    if(user) {
+      const applicationList = await applicationService.getAllApplications(userId);
+      console.log("AAAASTSTU", applicationList)
+      if(applicationList) {
+        let statistics = {
+          totalApplications: applicationList.length,
+          currentMonth: applicationList.filter(app => {
+            let dateCreated = new Date(app.dateApplied);
+            let today = new Date();
+            return ( dateCreated.getFullYear() === today.getFullYear()
+                    && dateCreated.getMonth() === today.getMonth());
+          }).length,
+          lastMonth: applicationList.filter(app => {
+            let dateCreated = new Date(app.dateApplied);
+            let today = new Date();
+            return ( dateCreated.getFullYear() === today.getFullYear()
+                    && dateCreated.getMonth() === (today.getMonth() - 1));
+          }).length,
+        }
+        console.log("STSTU", statistics)
+        return res.json(statistics);
+      }
+      else {
+        res.status(500).send();
+      }
+    }
+  });
+
+
+  app.get('/application/:id', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
+    const { userId } = req.auth;
+    const user = await clerk.clerkClient.users.getUser(userId);
+    if(user) {
+      const application = await applicationService.getApplicationById(req.params.id, userId);
+      if(application) {
+        return res.json(application);
+      }
+      else {
+        res.status(500).send();
+      }
+    }
   });
 
   

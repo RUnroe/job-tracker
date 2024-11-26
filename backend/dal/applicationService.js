@@ -66,7 +66,7 @@ const applicationService = {
     try {
       delete application._id;
       delete application.userId;
-      application.dateUpdated = new Date();
+      application.dateUpdated = new Date().toISOString();
       console.log(application);
       const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").updateOne({"_id": new mongo.ObjectId(applicationId)}, {$set: application});
       console.log(result);

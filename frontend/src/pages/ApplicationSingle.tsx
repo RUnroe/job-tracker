@@ -42,7 +42,17 @@ const ApplicationList = ({ isNew }: Props) => {
   useEffect(() => {
     if(!isNew && id) {
       //TODO: fetch application by id
-      getApplicationById(id).then(response => response.json()).then(app => setApplication(app));
+      getApplicationById(id)
+      .then(response => response.json())
+      .then(app => 
+        setApplication(
+          {
+            ...app, 
+            //Trim date time string to match input field requirements
+            // dateUpdated: app.dateUpdated.includes(".") ? app.dateUpdated.split(".")[0] : app.dateUpdated
+            dateUpdated: toIsoString(new Date(app.dateUpdated))
+          }
+      ));
     }
 
     getAllTechnologies().then(response => response.json()).then(technologies => {
@@ -52,6 +62,24 @@ const ApplicationList = ({ isNew }: Props) => {
   }, []);
 
 
+
+
+  function toIsoString(date: Date) {
+    var tzo = -date.getTimezoneOffset(),
+        dif = tzo >= 0 ? '+' : '-',
+        pad = function(num: number) {
+            return (num < 10 ? '0' : '') + num;
+        };
+  
+    return date.getFullYear() +
+        '-' + pad(date.getMonth() + 1) +
+        '-' + pad(date.getDate()) +
+        'T' + pad(date.getHours()) +
+        ':' + pad(date.getMinutes()) +
+        ':' + pad(date.getSeconds()) 
+  }
+
+  console.log(toIsoString(new Date()))
 
   const fieldUpdateHandler = (
     fieldKey: string,
@@ -244,7 +272,7 @@ const ApplicationList = ({ isNew }: Props) => {
               <Input
                 title="Date Updated"
                 fieldKey="dateUpdated"
-                fieldType={InputFieldType.Calendar}
+                fieldType={InputFieldType.DateTime}
                 fieldValue={application.dateUpdated}
                 fieldUpdateHandler={fieldUpdateHandler}
                 disabled

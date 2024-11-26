@@ -5,4 +5,5 @@ export enum InputFieldType {
   TextArea,
   Checkbox,
   Calendar,
+  DateTime,
 }

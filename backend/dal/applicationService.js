@@ -27,7 +27,7 @@ const applicationService = {
 
   getApplicationById: async function(id, userId) {
     try {
-      const applicationById = await dbClient.db(process.env.DATABASE_NAME).collection("application").findOne({"_id": mongo.ObjectId(id), userId});
+      const applicationById = await dbClient.db(process.env.DATABASE_NAME).collection("application").findOne({"_id": new mongo.ObjectId(id), userId});
       console.log(applicationById);
       return applicationById;
     }
@@ -65,12 +65,12 @@ const applicationService = {
     }
     try {
       delete application._id;
-      delete application.id;
       delete application.userId;
       application.dateUpdated = new Date();
-      const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").updateOne({"_id": mongo.ObjectId(id), userId}, {$set: application});
+      console.log(application);
+      const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").updateOne({"_id": new mongo.ObjectId(applicationId)}, {$set: application});
       console.log(result);
-      return result.insertedId;
+      return true;
     }
     catch (ex) {
       const errorMessage = `Error creating application: ${ex.message}`;

@@ -2,7 +2,7 @@ import { ApplicationStatus } from "./ApplicationStatus";
 
 
 export default interface Application {
-  ID?: string;
+  _id?: string;
   userId?: string;
   company: string;
   position: string;

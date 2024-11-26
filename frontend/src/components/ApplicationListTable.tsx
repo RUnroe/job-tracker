@@ -16,7 +16,7 @@ const ApplicationListTable = ({applicationsList}: Props) => {
         header: 'Company',
         //Render as link
         Cell: ({ row }: {row: MRT_Row<Application>}) => (
-          <Link to={`/application/${row.original.ID}`}>{row.original.company}</Link>
+          <Link to={`/application/${row.original._id}`}>{row.original.company}</Link>
         ),
       },
       {

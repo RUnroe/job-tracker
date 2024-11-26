@@ -10,6 +10,8 @@ import Application from "../types/Application";
 import getAllTechnologies from "../webservice/getAllTechnologies";
 import { RedirectToSignIn, SignedOut } from "@clerk/clerk-react";
 import postCreateApplication from "../webservice/postCreateApplication";
+import putUpdateApplication from "../webservice/putUpdateApplication";
+import getApplicationById from "../webservice/getApplicationById";
 
 interface Props {
   isNew?: boolean;
@@ -38,9 +40,9 @@ const ApplicationList = ({ isNew }: Props) => {
 
   //Fetch data by id if viewing an existing application
   useEffect(() => {
-    if(!isNew) {
+    if(!isNew && id) {
       //TODO: fetch application by id
-      console.log(id);
+      getApplicationById(id).then(response => response.json()).then(app => setApplication(app));
     }
 
     getAllTechnologies().then(response => response.json()).then(technologies => {
@@ -76,10 +78,17 @@ const ApplicationList = ({ isNew }: Props) => {
     setApplication(newApplication);
   }
 
-  const saveApplication = () => {
+  const saveApplication = async () => {
 
     console.log("Attempting to save");
-    postCreateApplication(application);
+    if(isNew) {
+      await postCreateApplication(application);
+      //TODO: Toast feedback of success, redirect to created application
+    }
+    else {
+      await putUpdateApplication(application);
+      //TODO: Toast feedback of success
+    }
 
   };
 

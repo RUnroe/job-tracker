@@ -8,6 +8,7 @@ import ApplicationListTable from "../components/ApplicationListTable";
 import Application from "../types/Application";
 import StatusFilters from "../components/StatusFilters";
 import { SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
+import getAllApplications from "../webservice/getAllApplications";
 
 
 const ApplicationList = () => {
@@ -17,10 +18,14 @@ const ApplicationList = () => {
   const [applicationsList, setApplicationsList] = useState<Application[]>();
   const [tableStatistics, setTableStatistics] = useState<any>();
 
+  console.log(applicationsList)
+
   //Fetch list and statistics
   useEffect(() => {
-    //TODO: fetch list of applications
-    setApplicationsList([]);
+    //Fetch list of applications
+    getAllApplications().then(response => response.json()).then(apps => {
+      setApplicationsList(apps);
+    });
     
     //TODO: fetch statistics list
     setTableStatistics({totalApplications: 100, currentMonth: 59, lastMonth: 22});

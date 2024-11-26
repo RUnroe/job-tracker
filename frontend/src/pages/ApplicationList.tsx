@@ -17,8 +17,8 @@ const ApplicationList = () => {
 
   const [applicationsList, setApplicationsList] = useState<Application[]>();
   const [tableStatistics, setTableStatistics] = useState<any>();
+  const [statusCounts, setStatusCounts] = useState<any>();
 
-  console.log(applicationsList)
 
   //Fetch list and statistics
   useEffect(() => {
@@ -30,6 +30,21 @@ const ApplicationList = () => {
     //TODO: fetch statistics list
     setTableStatistics({totalApplications: 100, currentMonth: 59, lastMonth: 22});
   }, []);
+
+
+  const getCountsByStatus = () => {
+    if(statusCounts) return statusCounts;
+    let counts = {Applied: 0, Interview: 0, Offer: 0, Rejected: 0};
+    if(applicationsList && applicationsList.length) {
+      applicationsList.forEach(app => {
+        counts[app.status] += 1;
+      });
+      //Cache value so we don't loop over list every rerender
+      setStatusCounts(counts);
+    }
+
+    return counts;
+  }
 
 
 
@@ -68,9 +83,9 @@ const ApplicationList = () => {
               <StatusFilters
                 selectedStatus={selectedStatusFilter || ""}
                 handleSelectStatus={handleClickSelectedStatus}
-                countsByStatus={{Applied: 90, Interview: 2, Offer: 0, Rejected: 12}}
+                countsByStatus={getCountsByStatus()}
               />
-              <ApplicationListTable applicationsList={applicationsList || []} />
+              <ApplicationListTable applicationsList={selectedStatusFilter ? (applicationsList || []).filter(app => app.status === selectedStatusFilter) : (applicationsList || [])}  />
             </Card>
           </div>
           <div className="right flex column gap-1">

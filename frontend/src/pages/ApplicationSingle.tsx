@@ -12,6 +12,7 @@ import { RedirectToSignIn, SignedOut } from "@clerk/clerk-react";
 import postCreateApplication from "../webservice/postCreateApplication";
 import putUpdateApplication from "../webservice/putUpdateApplication";
 import getApplicationById from "../webservice/getApplicationById";
+import { ToastContainer, toast } from 'react-toastify';
 
 interface Props {
   isNew?: boolean;
@@ -29,7 +30,7 @@ const ApplicationList = ({ isNew }: Props) => {
     status: ApplicationStatus.Applied,
     salary: "",
     listingLink: "",
-    technologies: ["React"],
+    technologies: [],
     companyInfo: "",
     roleInfo: "",
     dateApplied: "",
@@ -65,9 +66,7 @@ const ApplicationList = ({ isNew }: Props) => {
 
 
   function toIsoString(date: Date) {
-    var tzo = -date.getTimezoneOffset(),
-        dif = tzo >= 0 ? '+' : '-',
-        pad = function(num: number) {
+    var pad = function(num: number) {
             return (num < 10 ? '0' : '') + num;
         };
   
@@ -79,7 +78,6 @@ const ApplicationList = ({ isNew }: Props) => {
         ':' + pad(date.getSeconds()) 
   }
 
-  console.log(toIsoString(new Date()))
 
   const fieldUpdateHandler = (
     fieldKey: string,
@@ -111,11 +109,12 @@ const ApplicationList = ({ isNew }: Props) => {
     console.log("Attempting to save");
     if(isNew) {
       await postCreateApplication(application);
-      //TODO: Toast feedback of success, redirect to created application
+      //TODO: redirect to created application
+      toast.success("Application Created!");
     }
     else {
       await putUpdateApplication(application);
-      //TODO: Toast feedback of success
+      toast.success("Application Saved!");
     }
 
   };
@@ -125,6 +124,7 @@ const ApplicationList = ({ isNew }: Props) => {
       <SignedOut>
         <RedirectToSignIn />
       </SignedOut>
+      <ToastContainer autoClose={2000} />
       <header className="section">
         <section className="container flex space-between gap-1">
           <h1>{isNew && "New "}Application</h1>

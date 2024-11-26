@@ -57,7 +57,7 @@ const ApplicationList = ({ isNew }: Props) => {
     }
 
     getAllTechnologies().then(response => response.json()).then(technologies => {
-      setAllTechnologies(technologies.map((tech: {"_id": string, label: string}) => tech.label));
+      setAllTechnologies(technologies.map((tech: {"_id": string, label: string}) => tech.label).sort());
     });
     
   }, []);

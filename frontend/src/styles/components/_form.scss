@@ -17,6 +17,8 @@ input, textarea {
 textarea {
   resize: vertical;
   font-size: 0.9rem;
+  height: 100%;
+  min-height: 350px;
 }
 
 input:not([type='checkbox']), textarea {

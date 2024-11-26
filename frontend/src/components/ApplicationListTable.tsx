@@ -26,6 +26,7 @@ const ApplicationListTable = ({applicationsList}: Props) => {
       {
         accessorKey: 'technologies', 
         header: 'Technologies',
+        Cell: ({ cell }: {cell: {getValue: () => string[]}}) => cell?.getValue()?.join(", "),
       },
       {
         accessorKey: 'dateApplied', 

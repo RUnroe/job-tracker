@@ -8,6 +8,8 @@ import Tag from "../components/Tag";
 import TechnologyModal from "../components/TechnologyModal";
 import Application from "../types/Application";
 import getAllTechnologies from "../webservice/getAllTechnologies";
+import { RedirectToSignIn, SignedOut } from "@clerk/clerk-react";
+import postCreateApplication from "../webservice/postCreateApplication";
 
 interface Props {
   isNew?: boolean;
@@ -74,10 +76,18 @@ const ApplicationList = ({ isNew }: Props) => {
     setApplication(newApplication);
   }
 
-  const saveApplication = () => {};
+  const saveApplication = () => {
+
+    console.log("Attempting to save");
+    postCreateApplication(application);
+
+  };
 
   return (
     <main id="applicationSingle">
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
       <header className="section">
         <section className="container flex space-between gap-1">
           <h1>{isNew && "New "}Application</h1>
@@ -237,7 +247,7 @@ const ApplicationList = ({ isNew }: Props) => {
       {openTechnologyPopup && 
         <TechnologyModal
           open={openTechnologyPopup}
-          allTechnologies={allTechnologies}
+          allTechnologies={allTechnologies || []}
           handleAddTechnology={addTags}
           handleClose={() => setOpenTechnologyPopup(false)}
         />

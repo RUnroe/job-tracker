@@ -12,9 +12,9 @@ dbClient.connect().then(() => console.log("Connected to Mongo database")).catch(
 
 const applicationService = {
 
-  getAllApplications: async function() {
+  getAllApplications: async function(userId) {
     try {
-      const applicationList = await dbClient.db(process.env.DATABASE_NAME).collection("application").find().toArray();
+      const applicationList = await dbClient.db(process.env.DATABASE_NAME).collection("application").find({userId}).toArray();
       console.log(applicationList);
       return applicationList;
     }
@@ -25,9 +25,9 @@ const applicationService = {
     }
   },
 
-  getApplicationById: async function(id) {
+  getApplicationById: async function(id, userId) {
     try {
-      const applicationById = await dbClient.db(process.env.DATABASE_NAME).collection("application").findOne({"_id": mongo.ObjectId(id)});
+      const applicationById = await dbClient.db(process.env.DATABASE_NAME).collection("application").findOne({"_id": mongo.ObjectId(id), userId});
       console.log(applicationById);
       return applicationById;
     }
@@ -39,9 +39,36 @@ const applicationService = {
   },
 
   createApplication: async function(application, userId) {
+    if(!application) {
+      const errorMessage = `Application cannot be null`;
+      console.error(errorMessage);
+      return null;
+    }
     application.userId = userId;
     try {
       const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").insertOne(application);
+      console.log(result);
+      return result.insertedId;
+    }
+    catch (ex) {
+      const errorMessage = `Error creating application: ${ex.message}`;
+      console.error(errorMessage);
+      return null;
+    }
+  },
+
+  updateApplication: async function(applicationId, application, userId) {
+    if(!application || !applicationId) {
+      const errorMessage = `Application cannot be null`;
+      console.error(errorMessage);
+      return null;
+    }
+    try {
+      delete application._id;
+      delete application.id;
+      delete application.userId;
+      application.dateUpdated = new Date();
+      const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").updateOne({"_id": mongo.ObjectId(id), userId}, {$set: application});
       console.log(result);
       return result.insertedId;
     }

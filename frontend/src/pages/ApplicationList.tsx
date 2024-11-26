@@ -7,6 +7,7 @@ import Skeleton from "react-loading-skeleton";
 import ApplicationListTable from "../components/ApplicationListTable";
 import Application from "../types/Application";
 import StatusFilters from "../components/StatusFilters";
+import { SignedOut, RedirectToSignIn } from "@clerk/clerk-react";
 
 
 const ApplicationList = () => {
@@ -40,6 +41,9 @@ const ApplicationList = () => {
 
   return ( 
     <main id="applicationList">
+      <SignedOut>
+        <RedirectToSignIn />
+      </SignedOut>
       <header className="section">
         <section className="container flex space-between gap-1">
           <h1>Job Tracker</h1>

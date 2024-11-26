@@ -26,7 +26,6 @@ const configure = (app) => {
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
     if(user) {
-      console.log(req.body)
       const newApplicationId = await applicationService.createApplication(req.body?.application, userId);
       if(newApplicationId) {
         return res.json(newApplicationId);
@@ -42,7 +41,6 @@ const configure = (app) => {
     const user = await clerk.clerkClient.users.getUser(userId);
     //Only allow updating applications the user owns
     if(user && userId === req.body?.application?.userId) {
-      console.log(req.body)
       const newApplicationId = await applicationService.updateApplication(req.params.id, req.body?.application);
       if(newApplicationId) {
         return res.json(newApplicationId);
@@ -73,7 +71,6 @@ const configure = (app) => {
     const user = await clerk.clerkClient.users.getUser(userId);
     if(user) {
       const applicationList = await applicationService.getAllApplications(userId);
-      console.log("AAAASTSTU", applicationList)
       if(applicationList) {
         let statistics = {
           totalApplications: applicationList.length,
@@ -90,7 +87,6 @@ const configure = (app) => {
                     && dateCreated.getMonth() === (today.getMonth() - 1));
           }).length,
         }
-        console.log("STSTU", statistics)
         return res.json(statistics);
       }
       else {

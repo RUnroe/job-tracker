@@ -1,4 +1,3 @@
-const { application } = require("express");
 const mongo = require("mongodb");
 
 
@@ -15,7 +14,6 @@ const applicationService = {
   getAllApplications: async function(userId) {
     try {
       const applicationList = await dbClient.db(process.env.DATABASE_NAME).collection("application").find({userId}).toArray();
-      console.log(applicationList);
       return applicationList;
     }
     catch (ex) {
@@ -28,7 +26,6 @@ const applicationService = {
   getApplicationById: async function(id, userId) {
     try {
       const applicationById = await dbClient.db(process.env.DATABASE_NAME).collection("application").findOne({"_id": new mongo.ObjectId(id), userId});
-      console.log(applicationById);
       return applicationById;
     }
     catch (ex) {
@@ -67,9 +64,7 @@ const applicationService = {
       delete application._id;
       delete application.userId;
       application.dateUpdated = new Date().toISOString();
-      console.log(application);
       const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").updateOne({"_id": new mongo.ObjectId(applicationId)}, {$set: application});
-      console.log(result);
       return true;
     }
     catch (ex) {
@@ -82,7 +77,6 @@ const applicationService = {
   getAllTechnologies: async function() {
     try {
       const technologies = await dbClient.db(process.env.DATABASE_NAME).collection("technology").find().toArray();
-      console.log(technologies);
       return technologies;
     }
     catch (ex) {

@@ -98,6 +98,7 @@ a, a:visited {
 **************************/
 .tag-list {
   display: flex;
+  flex-wrap: wrap;
   gap: 1rem
   
 }
@@ -139,6 +140,8 @@ a, a:visited {
 .technology-item-list {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  box-sizing: border-box;
+  padding: 1rem;
   gap: 1rem;
 
   .technology-item {
@@ -147,9 +150,12 @@ a, a:visited {
     padding: 0.5rem;
     width: 100%;
     cursor: pointer;
+    box-sizing: border-box;
 
     &.selected {
       border-color: var(--color-primary-medium);
+      background-color: var(--color-primary-medium);
+      color: var(--color-btn-primary-text);
     }
   }
 }

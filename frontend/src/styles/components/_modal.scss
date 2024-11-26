@@ -1,8 +1,8 @@
 .modal {
   position: absolute;
-  top: 30%;
+  top: 10%;
   left: 50%;
-  transform: translate(-50%, -50%);
+  transform: translate(-50%, 0);
   width: 90%;
   max-width: 800px;
   box-sizing: border-box;
@@ -20,6 +20,9 @@
   }
   .modal-body {
     padding: 1rem;
+    max-height: 400px;
+    height: 100%;
+    overflow-x: hidden;
   }
   .modal-footer {
     display: flex;

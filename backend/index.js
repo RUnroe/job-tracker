@@ -10,6 +10,14 @@ const routes = require("./routes/routes");
 const app = express();
 
 app.use(cors());
+// app.use(cors({
+//   'allowedHeaders': ['sessionId', 'Content-Type', 'Authorization', 'authorization'],
+//   'exposedHeaders': ['sessionId'],
+//   'origin': process.env.CORS_ORIGINS,
+//   'methods': 'GET,HEAD,PUT,PATCH,POST,DELETE',
+//   'credentials': false,
+//   'preflightContinue': false
+// }));
 
 app.use(clerk.clerkMiddleware());
 

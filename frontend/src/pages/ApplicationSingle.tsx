@@ -7,6 +7,7 @@ import { useEffect, useState } from "react";
 import Tag from "../components/Tag";
 import TechnologyModal from "../components/TechnologyModal";
 import Application from "../types/Application";
+import getAllTechnologies from "../webservice/getAllTechnologies";
 
 interface Props {
   isNew?: boolean;
@@ -31,7 +32,7 @@ const ApplicationList = ({ isNew }: Props) => {
     dateUpdated: "",
   });
 
-  const allTechnologies = ["React"];
+  const [allTechnologies, setAllTechnologies] = useState<string[]>();
 
   //Fetch data by id if viewing an existing application
   useEffect(() => {
@@ -39,6 +40,11 @@ const ApplicationList = ({ isNew }: Props) => {
       //TODO: fetch application by id
       console.log(id);
     }
+
+    getAllTechnologies().then(response => response.json()).then(technologies => {
+      setAllTechnologies(technologies.map((tech: {"_id": string, label: string}) => tech.label));
+    });
+    
   }, []);
 
 

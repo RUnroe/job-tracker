@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import Card from "../components/Card";
 import Input from "../components/Input";
 import { InputFieldType } from "../types/InputFieldType";
@@ -20,6 +20,7 @@ interface Props {
 
 const ApplicationList = ({ isNew }: Props) => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [openTechnologyPopup, setOpenTechnologyPopup] = useState(false);
   const [application, setApplication] = useState<Application>({
@@ -108,8 +109,11 @@ const ApplicationList = ({ isNew }: Props) => {
 
     console.log("Attempting to save");
     if(isNew) {
-      await postCreateApplication(application);
-      //TODO: redirect to created application
+      let response = await postCreateApplication(application);
+      let id = await response.json();
+      console.log(id);
+      //Redirect to created application
+      navigate(`/application/${id}`);
       toast.success("Application Created!");
     }
     else {
@@ -118,7 +122,6 @@ const ApplicationList = ({ isNew }: Props) => {
     }
 
   };
-
   return (
     <main id="applicationSingle">
       <SignedOut>

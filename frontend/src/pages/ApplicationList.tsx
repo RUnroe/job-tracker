@@ -25,8 +25,16 @@ const ApplicationList = () => {
   useEffect(() => {
     //Fetch list of applications
     getAllApplications().then(response => response.json()).then(apps => {
-      setApplicationsList(apps);
-      console.log(apps)
+      let mappedApplications = apps.map((app: Application) => {
+        app.dateApplied = formatDate(app.dateApplied);
+        return {
+          ...app, 
+          dateUpdated: app.dateUpdated || app.dateApplied
+        }
+    });
+      
+      setApplicationsList(mappedApplications);
+      console.log(mappedApplications)
     });
     
     //Fetch statistics list
@@ -34,6 +42,11 @@ const ApplicationList = () => {
       setTableStatistics(stats);
     });
   }, []);
+
+  const formatDate = (isoDateString: string) => {
+    let [year, month, day] = isoDateString.split("-");
+    return `${month}/${day}/${year}`;
+  }
 
 
   const getCountsByStatus = () => {

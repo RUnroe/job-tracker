@@ -31,7 +31,7 @@ const ApplicationListTable = ({applicationsList}: Props) => {
       {
         accessorKey: 'dateApplied', 
         header: 'Applied at',
-        accessorFn: (row: { dateApplied: string | number | Date; }) => new Date(row.dateApplied),
+        accessorFn: (row: { dateApplied: string | number | Date; }) => new Date(row.dateApplied), 
         Cell: ({ cell }: {cell: {getValue: () => Date}}) => cell?.getValue()?.toLocaleDateString(),
       },
       {

@@ -56,6 +56,18 @@ const ApplicationListTable = ({applicationsList}: Props) => {
     enablePagination: true,
     enableDensityToggle: false,
     enableHiding: false,
+    initialState: {
+      sorting: [
+        {
+          id: "dateApplied",
+          desc: true,
+        },
+        {
+          id: "company",
+          desc: false,
+        },
+      ]
+    }
 
   });
   return (  

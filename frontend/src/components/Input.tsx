@@ -1,3 +1,4 @@
+import { ReactNode } from "react";
 import { InputFieldType } from "../types/InputFieldType";
 
 interface Props {
@@ -8,9 +9,10 @@ interface Props {
   fieldChecked?: boolean,
   disabled?: boolean,
   fieldUpdateHandler?: (fieldKey: string, newValue: string | number | boolean) => void,
+  children?: ReactNode,
 }
 
-const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, disabled = false, fieldUpdateHandler}: Props) => {
+const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, disabled = false, fieldUpdateHandler, children}: Props) => {
   
   const generateInputField = () => {
     switch(fieldType) {
@@ -34,7 +36,10 @@ const Input = ({title, fieldType, fieldKey, fieldValue, fieldChecked, disabled =
   
   return ( 
     <div className="input-group" key={fieldKey}>
-      <label className="sub-title" htmlFor={fieldKey}>{title}</label>
+      <div className="label-row">
+        <label className="sub-title" htmlFor={fieldKey}>{title}</label>
+        {children}
+      </div>
       {generateInputField()}
     </div>
   );

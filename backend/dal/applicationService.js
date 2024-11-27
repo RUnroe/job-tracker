@@ -42,6 +42,7 @@ const applicationService = {
       return null;
     }
     application.userId = userId;
+    application.dateUpdated = new Date().toISOString();
     try {
       const result = await dbClient.db(process.env.DATABASE_NAME).collection("application").insertOne(application);
       console.log(result);

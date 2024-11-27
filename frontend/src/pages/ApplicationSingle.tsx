@@ -175,7 +175,17 @@ const ApplicationList = ({ isNew }: Props) => {
                 fieldType={InputFieldType.Text}
                 fieldValue={application.listingLink}
                 fieldUpdateHandler={fieldUpdateHandler}
-              />
+              >
+                {application.listingLink &&
+                  <a
+                    className="btn secondary small" 
+                    href={application.listingLink}
+                    target="_blank"
+                  >
+                    View
+                  </a>
+                }
+              </Input>
             </Card>
 
             <Card>

@@ -297,7 +297,7 @@ const ApplicationList = ({ isNew }: Props) => {
       {openTechnologyPopup && 
         <TechnologyModal
           open={openTechnologyPopup}
-          allTechnologies={allTechnologies || []}
+          allTechnologies={allTechnologies?.filter((tech:string) => !application.technologies?.includes(tech)) || []}
           handleAddTechnology={addTags}
           handleClose={() => setOpenTechnologyPopup(false)}
         />

@@ -13,6 +13,7 @@ interface Props {
 const TechnologyModal = ({open, allTechnologies, handleAddTechnology, handleClose}: Props) => {
 
   const [selectedTechnologies, setSelectedTechnologies] = useState<string[]>([]);
+  const [searchString, setSearchString] = useState<string>("");
 
 
   const selectTechnology = (technologyToAdd: string) => {
@@ -43,9 +44,17 @@ const TechnologyModal = ({open, allTechnologies, handleAddTechnology, handleClos
               <h2>Add Technology</h2>
               <button onClick={handleClose} className="close">×</button>
             </div>
+            <div className="technology-filters">
+                <div className="search-input-container">
+                  <input type="text" value={searchString} onChange={event => setSearchString(event.target.value)} placeholder="Search..."/>
+                  <button className="clear-btn close" onClick={() => setSearchString("")} title={"Clear search"}>×</button>
+                </div>
+              </div>
             <div className="modal-body">
               <div className="technology-item-list">
-                {allTechnologies.map((tech:string) => (
+                {allTechnologies
+                  .filter((tech:string) => tech.replace(" ", "").toLowerCase().includes(searchString.replace(" ", "").toLowerCase()))
+                  .map((tech:string) => (
                   <div 
                     className={`technology-item ${selectedTechnologies.includes(tech) ? "selected" : ""}`} 
                     key={`${tech}-item`}

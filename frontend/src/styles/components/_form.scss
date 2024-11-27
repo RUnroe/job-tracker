@@ -146,6 +146,7 @@ button.close {
 
 .status-filter-row {
   display: flex;
+  flex-wrap: wrap;
   gap: 0.5rem;
   .status-filter {
     flex: 1;

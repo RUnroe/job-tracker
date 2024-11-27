@@ -33,7 +33,7 @@ const ApplicationList = ({ isNew }: Props) => {
     technologies: [],
     companyInfo: "",
     roleInfo: "",
-    dateApplied: "",
+    dateApplied: (new Date().toISOString().split("T")[0]),
     dateUpdated: "",
   });
 

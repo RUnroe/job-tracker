@@ -6,7 +6,7 @@ const jsonParser = bodyParser.json();
 const signInUrl = "https://natural-tick-28.accounts.dev/sign-in";
 
 const configure = (app) => {
-  app.get('/application/list', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
+  app.get('/api/application/list', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
     if(user) {
@@ -22,7 +22,7 @@ const configure = (app) => {
 
  
 
-  app.post('/application/new', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
+  app.post('/api/application/new', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
     if(user) {
@@ -36,7 +36,7 @@ const configure = (app) => {
     }
   });
 
-  app.put('/application/:id', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
+  app.put('/api/application/:id', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
     //Only allow updating applications the user owns
@@ -53,7 +53,7 @@ const configure = (app) => {
 
   
 
-  app.get('/options/technology', async (req, res) => {
+  app.get('/api/options/technology', async (req, res) => {
     
       let technologies = await applicationService.getAllTechnologies();
       if(technologies) {
@@ -65,7 +65,7 @@ const configure = (app) => {
     
   });
 
-  app.get('/application/statistics', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
+  app.get('/api/application/statistics', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
 
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
@@ -96,7 +96,7 @@ const configure = (app) => {
   });
 
 
-  app.get('/application/:id', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
+  app.get('/api/application/:id', clerk.requireAuth({ signInUrl }), jsonParser, async (req, res) => {
     const { userId } = req.auth;
     const user = await clerk.clerkClient.users.getUser(userId);
     if(user) {

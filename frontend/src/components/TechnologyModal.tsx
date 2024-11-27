@@ -53,7 +53,7 @@ const TechnologyModal = ({open, allTechnologies, handleAddTechnology, handleClos
             <div className="modal-body">
               <div className="technology-item-list">
                 {allTechnologies
-                  .filter((tech:string) => tech.replace(" ", "").toLowerCase().includes(searchString.replace(" ", "").toLowerCase()))
+                  .filter((tech:string) => tech?.replace(" ", "")?.toLowerCase()?.includes(searchString?.replace(" ", "")?.toLowerCase()))
                   .map((tech:string) => (
                   <div 
                     className={`technology-item ${selectedTechnologies.includes(tech) ? "selected" : ""}`} 

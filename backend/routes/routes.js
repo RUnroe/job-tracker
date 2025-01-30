@@ -82,9 +82,11 @@ const configure = (app) => {
           }).length,
           lastMonth: applicationList.filter(app => {
             let dateCreated = new Date(app.dateApplied);
-            let today = new Date();
-            return ( dateCreated.getFullYear() === today.getFullYear()
-                    && dateCreated.getMonth() === (today.getMonth() - 1));
+            let lastMonth = new Date();
+            lastMonth.setMonth(lastMonth.getMonth() - 1);
+            console.log(( dateCreated.getFullYear(), lastMonth.getFullYear(), " |||||| ", dateCreated.getMonth(), (lastMonth.getMonth())))
+            return ( dateCreated.getFullYear() === lastMonth.getFullYear()
+                    && dateCreated.getMonth() === (lastMonth.getMonth()));
           }).length,
         }
         return res.json(statistics);
